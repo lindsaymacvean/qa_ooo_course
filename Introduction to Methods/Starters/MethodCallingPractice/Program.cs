@@ -40,8 +40,15 @@ namespace MethodCallingPractice {
 
       // start calling 'Alice', 'Beatrice' etc running your code regularly
       // feel free to write any lines of code you need before each call
-      
-
+      Alice();
+      Beatrice(10);
+      Catherine(100, l=2);
+      //A widening happens here between an integer and a float
+      Dashmi("Programmer", i=2, i*3.1f);
+      Console.WriteLine(Eleanor("Dashmi", 3));
+      Console.WriteLine(Eleanor("UK", s="Dashmi", 3-1));
+      Console.WriteLine("Fiona is younger than 66: {0}", Convert.ToString(Fiona(25)));
+      Console.WriteLine(Georgina('G', s="Harrison"));
 
       // remember 
       // 1st param - a literal
@@ -51,7 +58,7 @@ namespace MethodCallingPractice {
       // decide where the widening conversion happens
       // call both versions of the 1 method of the 7 that is overloaded
       // one method returns true/false, think of an appropriate display!
-      
+      WhenYouHaveTime();
     }
 
 
@@ -64,10 +71,16 @@ namespace MethodCallingPractice {
       Console.WriteLine("When you have time...");
 
       Console.WriteLine("\nChile - ");
+      Console.WriteLine(Countries.Chile().ToString());
       Console.WriteLine("\nRussia - ");
+      Console.WriteLine(Countries.Russia().ToString());
       Console.WriteLine("\nMongolia - ");
+      Console.WriteLine(Countries.Mongolia().ToString());
       Console.WriteLine("\nZimbabwe - ");
+      Console.WriteLine(Countries.Zimbabwe().ToString());
       Console.WriteLine("\nFinland - ");
+      Console.WriteLine(Countries.Finland().ToString());
+      
     }
 
     #region The 'Hidden' Girls
