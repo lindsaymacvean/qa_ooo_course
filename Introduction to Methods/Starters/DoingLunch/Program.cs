@@ -33,10 +33,11 @@ namespace DoingLunch {
     static int RemainingRoastPotato(int roastPotatoes, int brusselSprouts) {
        roastPotatoes = roastPotatoes + 1;
        int roastPotatoQuarters = roastPotatoes * 4;
-       Console.WriteLine(roastPotatoQuarters);
+       // If its more brussel sprouts than quarters, display 0 as minimum
+       if (roastPotatoQuarters < brusselSprouts)
+                return 0;
        roastPotatoQuarters = roastPotatoQuarters % brusselSprouts;
-       // If its negative, display 0 as minimum
-       return Math.Max(0, roastPotatoQuarters);
+       return roastPotatoQuarters;
      }
   }
 }
