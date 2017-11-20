@@ -8,7 +8,7 @@ namespace EveningBehaviour {
     
     private static bool summerTime = true;
     private static bool sunnyEvening = true;
-    private static bool isWeekend = false;
+    private static bool isWeekend = true;
 
     static void Main(string[] args) {
         
