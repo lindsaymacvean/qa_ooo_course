@@ -8,8 +8,9 @@ namespace KidsInCandyStorePt1 {
     static void Main(string[] args) {
       int price = GetInteger("Price of a bag please");
       int money = GetInteger("How much money do you have?");
+      // Checking this first to rule out divide by 0 errors
       if (price <= 0)
-        ExitProgram("The price cant be zero or less");
+        ExitProgram("The price must be greater than 0");
       if (money < 0)
         ExitProgram("You can't have negative money");
       if (money < price)
