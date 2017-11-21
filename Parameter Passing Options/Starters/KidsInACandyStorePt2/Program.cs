@@ -16,9 +16,11 @@ namespace KidsInCandyStorePt2 {
         if (money > 0)
         {
           int numBags = (money / price);
+          int change = (money % price);
 
-          Console.WriteLine("If price is {0}p and you have {1}p you will be able to purchase {2} bags",
-                              price, money, numBags);
+          Console.WriteLine("If price is {0}p and you have {1}p you will be able to purchase {2} bags" +
+              " and will have {3}p left over",
+                              price, money, numBags, change);
         }
         else if (money == 0) // no pocket money
         {
