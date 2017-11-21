@@ -38,16 +38,19 @@ namespace KidsInCandyStorePt2 {
         Console.WriteLine("Price must be a non-negative numeric value");
       }
 
+      Console.ReadLine();
     }
     
     static int GetInteger(string message) {
       Console.WriteLine(message);
       string sVal = Console.ReadLine();
       int val;
- 
-      val = Convert.ToInt32(sVal); // this statement to be changed
-      
-      return val;
+      if (int.TryParse(sVal, out val))
+        return val;
+      else {
+        Console.WriteLine("You need to enter a number\n");
+        return GetInteger(message);
+      }
     }
   }
 }
