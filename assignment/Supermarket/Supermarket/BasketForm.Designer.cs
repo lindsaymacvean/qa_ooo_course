@@ -1,6 +1,6 @@
 ﻿namespace Supermarket
 {
-    partial class Form1
+    partial class BasketForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            this.productNameLabel = new System.Windows.Forms.Label();
             this.latestPriceLabel = new System.Windows.Forms.Label();
             this.offerLabel = new System.Windows.Forms.Label();
             this.quantityLabel = new System.Windows.Forms.Label();
@@ -49,14 +49,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.quantityField)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
+            // productNameLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(33, 25);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(78, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Product Name:";
+            this.productNameLabel.AutoSize = true;
+            this.productNameLabel.Location = new System.Drawing.Point(33, 25);
+            this.productNameLabel.Name = "productNameLabel";
+            this.productNameLabel.Size = new System.Drawing.Size(78, 13);
+            this.productNameLabel.TabIndex = 0;
+            this.productNameLabel.Text = "Product Name:";
             // 
             // latestPriceLabel
             // 
@@ -119,6 +119,7 @@
             this.productNameField.Name = "productNameField";
             this.productNameField.Size = new System.Drawing.Size(121, 21);
             this.productNameField.TabIndex = 7;
+            this.productNameField.SelectedIndexChanged += new System.EventHandler(this.productNameField_SelectedIndexChanged);
             // 
             // latestPriceField
             // 
@@ -204,7 +205,7 @@
             this.totalField.Size = new System.Drawing.Size(100, 20);
             this.totalField.TabIndex = 17;
             // 
-            // Form1
+            // BasketForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -226,9 +227,10 @@
             this.Controls.Add(this.quantityLabel);
             this.Controls.Add(this.offerLabel);
             this.Controls.Add(this.latestPriceLabel);
-            this.Controls.Add(this.label1);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Controls.Add(this.productNameLabel);
+            this.Name = "BasketForm";
+            this.Text = "Shopping Basket";
+            this.Load += new System.EventHandler(this.BasketForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.quantityField)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -237,7 +239,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label productNameLabel;
         private System.Windows.Forms.Label latestPriceLabel;
         private System.Windows.Forms.Label offerLabel;
         private System.Windows.Forms.Label quantityLabel;
