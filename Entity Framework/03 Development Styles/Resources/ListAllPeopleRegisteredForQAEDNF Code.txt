@@ -1,0 +1,13 @@
+        private static void ListAllPeopleRegisteredForQAEDNF() {
+            // Read it out from ModelFirst
+            using (CoursesContainer ctx = new CoursesContainer()) {
+
+                var query = from cr in ctx.CourseRuns
+                            where cr.Course.CourseCode == "QAEDNF"
+                            select cr.People;
+
+                foreach (var q in query)
+                    foreach (var p in q)
+                        Console.WriteLine(p.Name.FirstName + " " + p.Name.LastName);
+            }
+        }

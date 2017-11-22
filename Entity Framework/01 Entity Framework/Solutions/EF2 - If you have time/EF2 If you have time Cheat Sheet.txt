@@ -1,0 +1,9 @@
+var query = ctx.Customers.Where(c => c.Orders.Any(o => o.ShipCity.StartsWith("B")));
+
+Select Customize of the Customer datasource by adding a ListView as an allowable control
+drag the List View onto the form
+on the smart tag, set companyName and CustomerID as display and value members
+
+Add to Form_Load
+var query2 = ctx.Customers.Except(query);
+customerBindingSource1.DataSource = query2.ToList();

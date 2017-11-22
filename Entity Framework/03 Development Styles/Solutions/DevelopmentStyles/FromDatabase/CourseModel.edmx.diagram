@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1133279174854ad7be970b37f9babb2d" Name="Diagram1" ZoomLevel="85">
+        <EntityTypeShape EntityType="CoursesModel.CourseRun" Width="1.5" PointX="3.625" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="CoursesModel.CompanyRun" Width="1.5" PointX="4.5" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CoursesModel.CompanySite" Width="1.5" PointX="5.25" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CoursesModel.OurSite" Width="1.5" PointX="3.375" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CoursesModel.PublicRun" Width="1.5" PointX="2.625" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CoursesModel.Course" Width="1.5" PointX="0.5" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CoursesModel.Person" Width="1.5" PointX="6.75" PointY="2.25" IsExpanded="true" />
+        <AssociationConnector Association="CoursesModel.FK_CourseCourseRun" ManuallyRouted="false" />
+        <AssociationConnector Association="CoursesModel.PersonCourseRun" ManuallyRouted="false" />
+        <InheritanceConnector EntityType="CoursesModel.PublicRun" />
+        <InheritanceConnector EntityType="CoursesModel.CompanyRun" />
+        <InheritanceConnector EntityType="CoursesModel.OurSite" />
+        <InheritanceConnector EntityType="CoursesModel.CompanySite" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

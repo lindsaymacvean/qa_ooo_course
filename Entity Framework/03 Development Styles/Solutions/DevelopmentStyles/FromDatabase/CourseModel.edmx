@@ -1,0 +1,382 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CoursesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CourseRuns">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="CourseCourseCode" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CourseRuns_CompanyRun">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="MaxDelegates" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CourseRuns_CompanySite">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="SetupInstructions" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CourseRuns_OurSite">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="VMImage" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CourseRuns_PublicRun">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="VMImage" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="RoomCapacity" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Courses">
+          <Key>
+            <PropertyRef Name="CourseCode" />
+          </Key>
+          <Property Name="CourseCode" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="DaysDuration" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="People">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Address_Line1" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Address_Town" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Address_Postcode" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Name_FirstName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Name_LastName" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PersonCourseRun">
+          <Key>
+            <PropertyRef Name="People_Id" />
+            <PropertyRef Name="CourseRuns_Id" />
+          </Key>
+          <Property Name="People_Id" Type="int" Nullable="false" />
+          <Property Name="CourseRuns_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CompanyRun_inherits_CourseRun">
+          <End Role="CourseRuns" Type="Self.CourseRuns" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CourseRuns_CompanyRun" Type="Self.CourseRuns_CompanyRun" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="CourseRuns">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CourseRuns_CompanyRun">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanySite_inherits_CompanyRun">
+          <End Role="CourseRuns_CompanyRun" Type="Self.CourseRuns_CompanyRun" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CourseRuns_CompanySite" Type="Self.CourseRuns_CompanySite" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="CourseRuns_CompanyRun">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CourseRuns_CompanySite">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseCourseRun">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="1" />
+          <End Role="CourseRuns" Type="Self.CourseRuns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="CourseCode" />
+            </Principal>
+            <Dependent Role="CourseRuns">
+              <PropertyRef Name="CourseCourseCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OurSite_inherits_CompanyRun">
+          <End Role="CourseRuns_CompanyRun" Type="Self.CourseRuns_CompanyRun" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CourseRuns_OurSite" Type="Self.CourseRuns_OurSite" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="CourseRuns_CompanyRun">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CourseRuns_OurSite">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonCourseRun_CourseRun">
+          <End Role="CourseRuns" Type="Self.CourseRuns" Multiplicity="1" />
+          <End Role="PersonCourseRun" Type="Self.PersonCourseRun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CourseRuns">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonCourseRun">
+              <PropertyRef Name="CourseRuns_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PersonCourseRun_Person">
+          <End Role="People" Type="Self.People" Multiplicity="1" />
+          <End Role="PersonCourseRun" Type="Self.PersonCourseRun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="People">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PersonCourseRun">
+              <PropertyRef Name="People_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PublicRun_inherits_CourseRun">
+          <End Role="CourseRuns" Type="Self.CourseRuns" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CourseRuns_PublicRun" Type="Self.CourseRuns_PublicRun" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="CourseRuns">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CourseRuns_PublicRun">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CoursesModelStoreContainer">
+          <EntitySet Name="CourseRuns" EntityType="Self.CourseRuns" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CourseRuns_CompanyRun" EntityType="Self.CourseRuns_CompanyRun" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CourseRuns_CompanySite" EntityType="Self.CourseRuns_CompanySite" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CourseRuns_OurSite" EntityType="Self.CourseRuns_OurSite" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CourseRuns_PublicRun" EntityType="Self.CourseRuns_PublicRun" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Courses" EntityType="Self.Courses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="People" EntityType="Self.People" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PersonCourseRun" EntityType="Self.PersonCourseRun" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CompanyRun_inherits_CourseRun" Association="Self.FK_CompanyRun_inherits_CourseRun">
+            <End Role="CourseRuns" EntitySet="CourseRuns" />
+            <End Role="CourseRuns_CompanyRun" EntitySet="CourseRuns_CompanyRun" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanySite_inherits_CompanyRun" Association="Self.FK_CompanySite_inherits_CompanyRun">
+            <End Role="CourseRuns_CompanyRun" EntitySet="CourseRuns_CompanyRun" />
+            <End Role="CourseRuns_CompanySite" EntitySet="CourseRuns_CompanySite" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseCourseRun" Association="Self.FK_CourseCourseRun">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="CourseRuns" EntitySet="CourseRuns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OurSite_inherits_CompanyRun" Association="Self.FK_OurSite_inherits_CompanyRun">
+            <End Role="CourseRuns_CompanyRun" EntitySet="CourseRuns_CompanyRun" />
+            <End Role="CourseRuns_OurSite" EntitySet="CourseRuns_OurSite" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonCourseRun_CourseRun" Association="Self.FK_PersonCourseRun_CourseRun">
+            <End Role="CourseRuns" EntitySet="CourseRuns" />
+            <End Role="PersonCourseRun" EntitySet="PersonCourseRun" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PersonCourseRun_Person" Association="Self.FK_PersonCourseRun_Person">
+            <End Role="People" EntitySet="People" />
+            <End Role="PersonCourseRun" EntitySet="PersonCourseRun" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PublicRun_inherits_CourseRun" Association="Self.FK_PublicRun_inherits_CourseRun">
+            <End Role="CourseRuns" EntitySet="CourseRuns" />
+            <End Role="CourseRuns_PublicRun" EntitySet="CourseRuns_PublicRun" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CoursesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CourseRun" Abstract="true">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CourseCourseCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Course" Relationship="Self.FK_CourseCourseRun" FromRole="CourseRuns" ToRole="Courses" />
+          <NavigationProperty Name="People" Relationship="Self.PersonCourseRun" FromRole="CourseRuns" ToRole="People" />
+        </EntityType>
+        <EntityType Name="CompanyRun" BaseType="CoursesModel.CourseRun" Abstract="true">
+          <Property Name="MaxDelegates" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CompanySite" BaseType="CoursesModel.CompanyRun">
+          <Property Name="SetupInstructions" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OurSite" BaseType="CoursesModel.CompanyRun">
+          <Property Name="VMImage" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PublicRun" BaseType="CoursesModel.CourseRun">
+          <Property Name="VMImage" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="RoomCapacity" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Course">
+          <Key>
+            <PropertyRef Name="CourseCode" />
+          </Key>
+          <Property Name="CourseCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="DaysDuration" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CourseRuns" Relationship="Self.FK_CourseCourseRun" FromRole="Courses" ToRole="CourseRuns" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="CourseRuns" Relationship="Self.PersonCourseRun" FromRole="People" ToRole="CourseRuns" />
+          <Property Name="Address" Type="CoursesModel.Address" Nullable="false" />
+          <Property Name="Name" Type="CoursesModel.Name" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CourseCourseRun">
+          <End Role="Courses" Type="CoursesModel.Course" Multiplicity="1" />
+          <End Role="CourseRuns" Type="Self.CourseRun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="CourseCode" />
+            </Principal>
+            <Dependent Role="CourseRuns">
+              <PropertyRef Name="CourseCourseCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PersonCourseRun">
+          <End Role="CourseRuns" Type="Self.CourseRun" Multiplicity="*" />
+          <End Role="People" Type="Self.Person" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="CoursesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CourseRuns" EntityType="Self.CourseRun" />
+          <EntitySet Name="Courses" EntityType="CoursesModel.Course" />
+          <EntitySet Name="People" EntityType="Self.Person" />
+          <AssociationSet Name="FK_CourseCourseRun" Association="Self.FK_CourseCourseRun">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="CourseRuns" EntitySet="CourseRuns" />
+          </AssociationSet>
+          <AssociationSet Name="PersonCourseRun" Association="Self.PersonCourseRun">
+            <End Role="CourseRuns" EntitySet="CourseRuns" />
+            <End Role="People" EntitySet="People" />
+          </AssociationSet>
+        </EntityContainer>
+        <ComplexType Name="Address" >
+          <Property Type="String" Name="Line1" Nullable="false" />
+          <Property Type="String" Name="Town" Nullable="false" />
+          <Property Type="String" Name="Postcode" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Name" >
+          <Property Type="String" Name="FirstName" Nullable="false" />
+          <Property Type="String" Name="LastName" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CoursesModelStoreContainer" CdmEntityContainer="CoursesEntities">
+          <EntitySetMapping Name="CourseRuns">
+            <EntityTypeMapping TypeName="IsTypeOf(CoursesModel.CourseRun)">
+              <MappingFragment StoreEntitySet="CourseRuns">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CourseCourseCode" ColumnName="CourseCourseCode" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(CoursesModel.PublicRun)">
+              <MappingFragment StoreEntitySet="CourseRuns_PublicRun">
+               
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RoomCapacity" ColumnName="RoomCapacity" />
+                <ScalarProperty Name="VMImage" ColumnName="VMImage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(CoursesModel.CompanyRun)">
+              <MappingFragment StoreEntitySet="CourseRuns_CompanyRun">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MaxDelegates" ColumnName="MaxDelegates" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(CoursesModel.OurSite)">
+              <MappingFragment StoreEntitySet="CourseRuns_OurSite">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="VMImage" ColumnName="VMImage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(CoursesModel.CompanySite)">
+              <MappingFragment StoreEntitySet="CourseRuns_CompanySite">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SetupInstructions" ColumnName="SetupInstructions" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Courses">
+            <EntityTypeMapping TypeName="CoursesModel.Course">
+              <MappingFragment StoreEntitySet="Courses">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CourseCode" ColumnName="CourseCode" />
+                <ScalarProperty Name="DaysDuration" ColumnName="DaysDuration" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="People">
+            <EntityTypeMapping TypeName="CoursesModel.Person">
+              <MappingFragment StoreEntitySet="People">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ComplexProperty Name="Address">
+                  <ScalarProperty Name="Postcode" ColumnName="Address_Postcode" />
+                  <ScalarProperty Name="Town" ColumnName="Address_Town" />
+                  <ScalarProperty Name="Line1" ColumnName="Address_Line1" />
+                </ComplexProperty>
+                <ComplexProperty Name="Name">
+                  <ScalarProperty Name="LastName" ColumnName="Name_LastName" />
+                  <ScalarProperty Name="FirstName" ColumnName="Name_FirstName" />
+                </ComplexProperty>
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="PersonCourseRun" TypeName="CoursesModel.PersonCourseRun" StoreEntitySet="PersonCourseRun">
+            <EndProperty Name="CourseRuns">
+              <ScalarProperty Name="Id" ColumnName="CourseRuns_Id" />
+            </EndProperty>
+            <EndProperty Name="People">
+              <ScalarProperty Name="Id" ColumnName="People_Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

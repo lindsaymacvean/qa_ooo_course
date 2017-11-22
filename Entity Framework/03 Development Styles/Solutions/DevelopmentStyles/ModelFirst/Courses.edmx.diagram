@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4cf8dbad5ea641a29d846458e2aeb0e3" Name="Diagram1" ZoomLevel="86" >
+        <EntityTypeShape EntityType="Courses.Course" Width="1.5" PointX="1.375" PointY="1.25" />
+        <EntityTypeShape EntityType="Courses.CourseRun" Width="2" PointX="3.875" PointY="1.125" />
+        <AssociationConnector Association="Courses.CourseCourseRun" />
+        <EntityTypeShape EntityType="Courses.PublicRun" Width="1.5" PointX="3.625" PointY="4" />
+        <InheritanceConnector EntityType="Courses.PublicRun" />
+        <EntityTypeShape EntityType="Courses.CompanyRun" Width="1.5" PointX="5.625" PointY="4" />
+        <InheritanceConnector EntityType="Courses.CompanyRun" />
+        <EntityTypeShape EntityType="Courses.OurSite" Width="1.5" PointX="4.875" PointY="5.875" />
+        <InheritanceConnector EntityType="Courses.OurSite" />
+        <EntityTypeShape EntityType="Courses.CompanySite" Width="1.5" PointX="6.875" PointY="5.875" />
+        <InheritanceConnector EntityType="Courses.CompanySite" />
+        <EntityTypeShape EntityType="Courses.Person" Width="1.5" PointX="6.875" PointY="1.375" />
+        <AssociationConnector Association="Courses.PersonCourseRun" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
