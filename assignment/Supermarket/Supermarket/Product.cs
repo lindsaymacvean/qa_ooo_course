@@ -20,5 +20,11 @@ namespace Supermarket
         public decimal UnitPrice { get; set; }
 
         public virtual Offer Offer { get; set; }
+
+        public override string ToString()
+        {
+            return ProductName;
+        }
+
     }
 }

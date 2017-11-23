@@ -15,12 +15,14 @@ namespace Supermarket
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Offer>()
-                .Property(e => e.ShortDescription)
-                .IsFixedLength();
+                 //.Property(e => e.ShortDescription)
+                 //.IsFixedLength()
+                 .HasKey(k => k.OfferID);
 
             modelBuilder.Entity<Product>()
-                .Property(e => e.UnitPrice)
-                .HasPrecision(19, 4);
+                //.Property(e => e.UnitPrice)
+                //.HasPrecision(19, 4)
+                .HasKey(k => k.ProductID);
         }
     }
 }
