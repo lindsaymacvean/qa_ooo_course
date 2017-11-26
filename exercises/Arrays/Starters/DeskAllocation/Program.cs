@@ -18,10 +18,21 @@ namespace DeskAllocation
         public static void Main(string[] args)
         {
             // initialise and size the array at 3 rows * 4 columns
-            deskNames = new string[5,1];
-            AllocateAllDesks();
+            deskNames = new string[4,3];
+            AllocateAllDesks("frontLeft");
             DisplayDeskMap();
 
+            deskNames = new string[2,4];
+            AllocateAllDesks("frontRight");
+            DisplayDeskMap();
+
+            deskNames = new string[5, 1];
+            AllocateAllDesks("backLeft");
+            DisplayDeskMap();
+
+            deskNames = new string[2, 2];
+            AllocateAllDesks("backRight");
+            DisplayDeskMap();
 
             SearchDesks("Jaz");
             SearchDesks("Nick");
@@ -32,16 +43,16 @@ namespace DeskAllocation
             Console.ReadLine();
         }
 
-        public static void AllocateAllDesks()
+        public static void AllocateAllDesks(string direction)
         {
             foreach (string name in names)
             {
-                AllocateDesk(name);
+                AllocateDesk(name, direction);
             }
         }
 
         // called from AllocateAllDesks()
-        public static void AllocateDesk(string name)
+        public static void AllocateDesk(string name, string direction)
         {
             Func<int, int, int> callback = delegate(int row, int col)
             {
@@ -51,10 +62,18 @@ namespace DeskAllocation
                     Console.WriteLine(name + " was assigned to desk " + row + ", " + col);
                     return -1;
                 }
-                //Console.WriteLine("The desk was already assigned to " + deskNames[row, col]);
+                //Console.WriteLine("The desk {0},{1} was already assigned to {2}", row, col, deskNames[row, col]);
                 return 0;
             };
-            LoopDesks(callback);
+
+            if (direction == "frontRight")
+                LoopDesksFromFrontRight(callback);
+            if (direction == "frontLeft")
+                LoopDesksFromFrontLeft(callback);
+            if (direction == "backLeft")
+                LoopDesksFromBackLeft(callback);
+            if (direction == "backRight")
+                LoopDesksFromBackRight(callback);
         }
 
         public static void DisplayDeskMap()
@@ -70,7 +89,7 @@ namespace DeskAllocation
                 }
                 return 0;
             };
-            LoopDesks(callback);
+            LoopDesksFromFrontLeft(callback);
         }
 
         public static void SearchDesks(string name)
@@ -84,12 +103,12 @@ namespace DeskAllocation
                 }
                 else if (col == deskNames.GetUpperBound(1) && row == deskNames.GetUpperBound(0))
                 {
-                    Console.WriteLine("Could not find {0} at any of the desks", name);
+                    //Console.WriteLine("Could not find {0} at any of the desks", name);
                     return -1;
                 }
                 return 0;
             };
-            LoopDesks(callback);
+            LoopDesksFromFrontLeft(callback);
         }
 
         public static void ClearAllDesks()
@@ -98,11 +117,50 @@ namespace DeskAllocation
         }
 
         // Decided to implement a method to implement an anonymous function within the loop
-        public static void LoopDesks(Func<int, int, int> callBack)
+        public static void LoopDesksFromFrontLeft(Func<int, int, int> callBack)
         {
             row:  for (int row = 0; row <= deskNames.GetUpperBound(0); row++)
             {
                 col: for (int col = 0; col <= deskNames.GetUpperBound(1); col++)
+                {
+                    int result = callBack(row, col);
+                    if (result != 0)
+                        return;
+                }
+            }
+        }
+
+        public static void LoopDesksFromBackLeft(Func<int, int, int> callBack)
+        {
+            row: for (int row = deskNames.GetUpperBound(0); row >= 0; row--)
+            {
+                col: for (int col = 0; col <= deskNames.GetUpperBound(1); col++)
+                {
+                    int result = callBack(row, col);
+                    if (result != 0)
+                        return;
+                }
+            }
+        }
+
+        public static void LoopDesksFromFrontRight(Func<int, int, int> callBack)
+        {
+            row: for (int row = 0; row <= deskNames.GetUpperBound(0); row++)
+            {
+                col: for (int col = deskNames.GetUpperBound(1); col >= 0; col--)
+                {
+                    int result = callBack(row, col);
+                    if (result != 0)
+                        return;
+                }
+            }
+        }
+
+        public static void LoopDesksFromBackRight(Func<int, int, int> callBack)
+        {
+            row: for (int row = deskNames.GetUpperBound(0); row >= 0; row--)
+            {
+                col: for (int col = deskNames.GetUpperBound(1); col >= 0; col--)
                 {
                     int result = callBack(row, col);
                     if (result != 0)
