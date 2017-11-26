@@ -18,7 +18,7 @@ namespace DeskAllocation
         public static void Main(string[] args)
         {
             // initialise and size the array at 3 rows * 4 columns
-            deskNames = new string[3,4];
+            deskNames = new string[5,1];
             AllocateAllDesks();
             DisplayDeskMap();
 
@@ -26,6 +26,9 @@ namespace DeskAllocation
             SearchDesks("Jaz");
             SearchDesks("Nick");
 
+            Console.WriteLine("Who do you want to search for?");
+            string name = Console.ReadLine();
+            SearchDesks(name);
             Console.ReadLine();
         }
 
