@@ -16,6 +16,8 @@ namespace Supermarket
 
         public int OfferID { get; set; }
 
+        public int Quantity { get; set; }
+
         [Required]
         [StringLength(60)]
         public string OfferDescription { get; set; }

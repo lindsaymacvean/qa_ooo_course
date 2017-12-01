@@ -45,9 +45,12 @@
             this.noItemsTextBox = new System.Windows.Forms.TextBox();
             this.totalTextBox = new System.Windows.Forms.TextBox();
             this.basketDataGridView = new System.Windows.Forms.DataGridView();
-            this.offerCheckBox = new System.Windows.Forms.CheckBox();
+            this.offerTextBox = new System.Windows.Forms.TextBox();
+            this.offersAppliedDataGridView = new System.Windows.Forms.DataGridView();
+            this.offersAppliedLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.quantityNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.basketDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.offersAppliedDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // productNameLabel
@@ -80,7 +83,7 @@
             // quantityLabel
             // 
             this.quantityLabel.AutoSize = true;
-            this.quantityLabel.Location = new System.Drawing.Point(629, 23);
+            this.quantityLabel.Location = new System.Drawing.Point(652, 24);
             this.quantityLabel.Name = "quantityLabel";
             this.quantityLabel.Size = new System.Drawing.Size(49, 13);
             this.quantityLabel.TabIndex = 3;
@@ -89,7 +92,7 @@
             // basketLabel
             // 
             this.basketLabel.AutoSize = true;
-            this.basketLabel.Location = new System.Drawing.Point(33, 127);
+            this.basketLabel.Location = new System.Drawing.Point(33, 86);
             this.basketLabel.Name = "basketLabel";
             this.basketLabel.Size = new System.Drawing.Size(43, 13);
             this.basketLabel.TabIndex = 4;
@@ -121,7 +124,7 @@
             this.productNameComboBox.Name = "productNameComboBox";
             this.productNameComboBox.Size = new System.Drawing.Size(186, 21);
             this.productNameComboBox.TabIndex = 7;
-            this.productNameComboBox.SelectedIndexChanged += new System.EventHandler(this.productNameComboBox_SelectedIndexChanged);
+            this.productNameComboBox.SelectedIndexChanged += new System.EventHandler(this.ProductNameComboBox_SelectedIndexChanged);
             // 
             // latestPriceTextBox
             // 
@@ -133,7 +136,7 @@
             // 
             // quantityNumericUpDown
             // 
-            this.quantityNumericUpDown.Location = new System.Drawing.Point(632, 45);
+            this.quantityNumericUpDown.Location = new System.Drawing.Point(655, 46);
             this.quantityNumericUpDown.Name = "quantityNumericUpDown";
             this.quantityNumericUpDown.Size = new System.Drawing.Size(75, 20);
             this.quantityNumericUpDown.TabIndex = 10;
@@ -145,34 +148,34 @@
             // 
             // addButton
             // 
-            this.addButton.Location = new System.Drawing.Point(750, 45);
+            this.addButton.Location = new System.Drawing.Point(750, 44);
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(75, 23);
             this.addButton.TabIndex = 12;
             this.addButton.Text = "Add";
             this.addButton.UseVisualStyleBackColor = true;
-            this.addButton.Click += new System.EventHandler(this.addButton_Click);
+            this.addButton.Click += new System.EventHandler(this.AddButton_Click);
             // 
             // removeButton
             // 
             this.removeButton.AccessibleDescription = "";
-            this.removeButton.Location = new System.Drawing.Point(750, 143);
+            this.removeButton.Location = new System.Drawing.Point(750, 102);
             this.removeButton.Name = "removeButton";
             this.removeButton.Size = new System.Drawing.Size(75, 23);
             this.removeButton.TabIndex = 13;
             this.removeButton.Text = "Remove";
             this.removeButton.UseVisualStyleBackColor = true;
-            this.removeButton.Click += new System.EventHandler(this.removeButton_Click);
+            this.removeButton.Click += new System.EventHandler(this.RemoveButton_Click);
             // 
             // removeAllButton
             // 
-            this.removeAllButton.Location = new System.Drawing.Point(750, 172);
+            this.removeAllButton.Location = new System.Drawing.Point(750, 131);
             this.removeAllButton.Name = "removeAllButton";
             this.removeAllButton.Size = new System.Drawing.Size(75, 23);
             this.removeAllButton.TabIndex = 14;
             this.removeAllButton.Text = "Remove All";
             this.removeAllButton.UseVisualStyleBackColor = true;
-            this.removeAllButton.Click += new System.EventHandler(this.removeAllButton_Click);
+            this.removeAllButton.Click += new System.EventHandler(this.RemoveAllButton_Click);
             // 
             // exitButton
             // 
@@ -182,7 +185,7 @@
             this.exitButton.TabIndex = 15;
             this.exitButton.Text = "Exit";
             this.exitButton.UseVisualStyleBackColor = true;
-            this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
+            this.exitButton.Click += new System.EventHandler(this.ExitButton_Click);
             // 
             // noItemsTextBox
             // 
@@ -205,29 +208,48 @@
             // basketDataGridView
             // 
             this.basketDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.basketDataGridView.Location = new System.Drawing.Point(36, 143);
+            this.basketDataGridView.Location = new System.Drawing.Point(36, 102);
             this.basketDataGridView.Name = "basketDataGridView";
             this.basketDataGridView.ReadOnly = true;
             this.basketDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.basketDataGridView.Size = new System.Drawing.Size(708, 252);
+            this.basketDataGridView.Size = new System.Drawing.Size(708, 158);
             this.basketDataGridView.TabIndex = 18;
             // 
-            // offerCheckBox
+            // offerTextBox
             // 
-            this.offerCheckBox.AutoSize = true;
-            this.offerCheckBox.Location = new System.Drawing.Point(342, 48);
-            this.offerCheckBox.Name = "offerCheckBox";
-            this.offerCheckBox.Size = new System.Drawing.Size(80, 17);
-            this.offerCheckBox.TabIndex = 20;
-            this.offerCheckBox.Text = "checkBox1";
-            this.offerCheckBox.UseVisualStyleBackColor = true;
+            this.offerTextBox.Location = new System.Drawing.Point(342, 46);
+            this.offerTextBox.Name = "offerTextBox";
+            this.offerTextBox.ReadOnly = true;
+            this.offerTextBox.Size = new System.Drawing.Size(294, 20);
+            this.offerTextBox.TabIndex = 19;
+            // 
+            // offersAppliedDataGridView
+            // 
+            this.offersAppliedDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.offersAppliedDataGridView.Location = new System.Drawing.Point(36, 291);
+            this.offersAppliedDataGridView.Name = "offersAppliedDataGridView";
+            this.offersAppliedDataGridView.ReadOnly = true;
+            this.offersAppliedDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.offersAppliedDataGridView.Size = new System.Drawing.Size(708, 104);
+            this.offersAppliedDataGridView.TabIndex = 20;
+            // 
+            // offersAppliedLabel
+            // 
+            this.offersAppliedLabel.AutoSize = true;
+            this.offersAppliedLabel.Location = new System.Drawing.Point(33, 275);
+            this.offersAppliedLabel.Name = "offersAppliedLabel";
+            this.offersAppliedLabel.Size = new System.Drawing.Size(76, 13);
+            this.offersAppliedLabel.TabIndex = 21;
+            this.offersAppliedLabel.Text = "Offers Applied:";
             // 
             // BasketForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(854, 426);
-            this.Controls.Add(this.offerCheckBox);
+            this.Controls.Add(this.offersAppliedLabel);
+            this.Controls.Add(this.offersAppliedDataGridView);
+            this.Controls.Add(this.offerTextBox);
             this.Controls.Add(this.basketDataGridView);
             this.Controls.Add(this.totalTextBox);
             this.Controls.Add(this.noItemsTextBox);
@@ -250,6 +272,7 @@
             this.Load += new System.EventHandler(this.BasketForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.quantityNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.basketDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.offersAppliedDataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -274,7 +297,9 @@
         private System.Windows.Forms.TextBox noItemsTextBox;
         private System.Windows.Forms.TextBox totalTextBox;
         private System.Windows.Forms.DataGridView basketDataGridView;
-        private System.Windows.Forms.CheckBox offerCheckBox;
+        private System.Windows.Forms.TextBox offerTextBox;
+        private System.Windows.Forms.DataGridView offersAppliedDataGridView;
+        private System.Windows.Forms.Label offersAppliedLabel;
     }
 }
 

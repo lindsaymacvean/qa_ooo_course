@@ -63,6 +63,7 @@
     </Compile>
     <Compile Include="DBModel.cs" />
     <Compile Include="Offer.cs" />
+    <Compile Include="OfferList.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

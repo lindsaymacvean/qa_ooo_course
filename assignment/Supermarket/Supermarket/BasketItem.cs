@@ -6,21 +6,39 @@ using System.Threading.Tasks;
 
 namespace Supermarket
 {
-    class BasketItem
+    public class BasketItem
     {
-        public string Name { get; set; }
-        public decimal UnitPrice { get; set; }
-        public Offer Offer { get; set; }
-        public decimal Quantity { get; set; }
-        public decimal TotalPrice { get; set; }
-
-        public BasketItem(Product product, decimal quantity, bool offer)
+        public string Name { get; }
+        public decimal UnitPrice { get; }
+        public decimal Quantity
         {
+            get { return this.Quantity; }
+            set
+            {
+                this.Quantity = value;
+                // Update this items total if more units added
+                this.CalculateTotal();
+            }
+        }
+
+        public decimal TotalPrice { get; private set; }
+        public int ProductID { get; }
+        public Offer Offer { get; }
+
+        public BasketItem(Product product, decimal quantity)
+        {
+            // Setting the public properties
             this.Name = product.ProductName;
             this.UnitPrice = Math.Round(product.UnitPrice,2);
-            // this.Offer = product.Offer ?? new Offer();
+            this.ProductID = product.ProductID;
             this.Quantity = quantity;
+            this.Offer = product.Offer;
             this.TotalPrice = product.UnitPrice * quantity;
+        }
+
+        private void CalculateTotal()
+        {
+            this.TotalPrice = this.Quantity * this.UnitPrice;
         }
     }
 }
