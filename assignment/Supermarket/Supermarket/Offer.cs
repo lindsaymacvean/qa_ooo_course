@@ -12,11 +12,13 @@ namespace Supermarket
         public Offer()
         {
             Products = new HashSet<Product>();
+            Quantity = 0;
         }
 
-        public int OfferID { get; set; }
-
+        [NotMapped]
         public int Quantity { get; set; }
+
+        public int OfferID { get; set; }
 
         [Required]
         [StringLength(60)]

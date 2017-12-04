@@ -22,12 +22,12 @@ namespace Supermarket
         private static DBModel dBModel = new DBModel();
 
         // Instantiate the basket
-        private static List<Offer> offers = (from o in dBModel.Offers select o).ToList();
+        //private static List<Offer> offers = (from o in dBModel.Offers select o).ToList();
         private ShoppingBasket basket = new ShoppingBasket();
 
         private void BasketForm_Load(object sender, EventArgs e)
         {
-            // Get the collections of products and offers
+            // Get the collections of products
             var productNames = (from p in dBModel.Products
                                 select p).ToList();
 
@@ -50,6 +50,7 @@ namespace Supermarket
             // Update the Latest Price
             decimal currentSelectionPrice = Math.Round(currentSelection.UnitPrice, 2);
             latestPriceTextBox.Text = "£" + currentSelectionPrice.ToString();
+            quantityNumericUpDown.Value = 1.0M;
             // Update the available offer;
             if (currentSelection.Offer == null)
                 offerTextBox.Text = "No offer available";
@@ -68,7 +69,7 @@ namespace Supermarket
         private void AddButton_Click(object sender, EventArgs e)
         {
             Product product = (Product)productNameComboBox.SelectedItem;
-            decimal quantity = quantityNumericUpDown.Value;
+            int quantity = Convert.ToInt32(quantityNumericUpDown.Value);
             // Create a basket item with the correct offer
             BasketItem item = new BasketItem(product, quantity);
             // Add it to Shopping basket object

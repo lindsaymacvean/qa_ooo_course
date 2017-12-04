@@ -10,12 +10,13 @@ namespace Supermarket
     {
         public string Name { get; }
         public decimal UnitPrice { get; }
-        public decimal Quantity
+        public int Quantity
         {
             get { return this.Quantity; }
             set
             {
                 this.Quantity = value;
+                this.Offer.Quantity += value;
                 // Update this items total if more units added
                 this.CalculateTotal();
             }
@@ -25,7 +26,7 @@ namespace Supermarket
         public int ProductID { get; }
         public Offer Offer { get; }
 
-        public BasketItem(Product product, decimal quantity)
+        public BasketItem(Product product, int quantity)
         {
             // Setting the public properties
             this.Name = product.ProductName;
@@ -33,6 +34,7 @@ namespace Supermarket
             this.ProductID = product.ProductID;
             this.Quantity = quantity;
             this.Offer = product.Offer;
+            this.Offer.Quantity += quantity;
             this.TotalPrice = product.UnitPrice * quantity;
         }
 
