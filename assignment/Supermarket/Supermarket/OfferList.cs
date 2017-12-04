@@ -12,19 +12,11 @@ namespace Supermarket
         protected override void InsertItem(int index, Offer item)
         {
             // If the Keyed Collection already has the offer
-            // then just increment its quantity
+            // then just return
             if (this.Contains(item.OfferID))
-                this[item.OfferID].Quantity += 1;
+                return;
             else
                 base.InsertItem(index, item);
-        }
-
-        protected override void RemoveItem(int index)
-        {
-            if (this[index].Quantity > 1)
-                this[index].Quantity -= 1;
-            else
-                base.RemoveItem(index);
         }
     }
 }

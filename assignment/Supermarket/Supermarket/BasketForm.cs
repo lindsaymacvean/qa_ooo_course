@@ -74,10 +74,10 @@ namespace Supermarket
             BasketItem item = new BasketItem(product, quantity);
             // Add it to Shopping basket object
             basket.Add(item);
-            UpdateDataGridView();
+            UpdateDataGridViews();
         }
 
-        private void UpdateDataGridView()
+        private void UpdateDataGridViews()
         {
             // Update the basketDataGridView
             basketDataGridView.DataBindings.Clear();
@@ -99,13 +99,14 @@ namespace Supermarket
             {
                 basket.Remove((BasketItem)item.DataBoundItem);
             }
-            UpdateDataGridView();
+            UpdateDataGridViews();
         }
 
         private void RemoveAllButton_Click(object sender, EventArgs e)
         {
+            basket.OfferList.Clear();
             basket.Clear();
-            UpdateDataGridView();
+            UpdateDataGridViews();
         }
 
         private void ExitButton_Click(object sender, EventArgs e)

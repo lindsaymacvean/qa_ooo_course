@@ -68,12 +68,23 @@ namespace Supermarket
             // If the Keyed Collection already has the product
             // then just increment its quantity
             if (this.Contains(item.ProductID))
+            {
                 this[item.ProductID].Quantity += item.Quantity;
+            }
             else
             {
                 OfferList.Add(item.Offer);
                 base.InsertItem(index, item);
             }
+        }
+
+        protected override void RemoveItem(int index)
+        {
+            BasketItem item = base.Items[index];
+            item.Offer.Quantity -= item.Quantity;
+            if (item.Offer.Quantity == 0)
+                OfferList.Remove(item.Offer.OfferID);
+            base.RemoveItem(index);
         }
     }
 }

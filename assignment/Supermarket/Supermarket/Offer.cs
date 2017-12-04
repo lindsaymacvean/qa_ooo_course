@@ -16,7 +16,19 @@ namespace Supermarket
         }
 
         [NotMapped]
-        public int Quantity { get; set; }
+        private int _quantity;
+        [NotMapped]
+        public int Quantity
+        {
+            get { return this._quantity; }
+            set
+            {
+                // Make sure the quantity is never negative
+                this._quantity = value;
+                if (this._quantity < 1)
+                    this._quantity = 0;
+            }
+        }
 
         public int OfferID { get; set; }
 

@@ -10,13 +10,14 @@ namespace Supermarket
     {
         public string Name { get; }
         public decimal UnitPrice { get; }
+        // To stop a stackoverflow we need a private property
+        private int _quantity;
         public int Quantity
         {
-            get { return this.Quantity; }
+            get { return this._quantity; }
             set
             {
-                this.Quantity = value;
-                this.Offer.Quantity += value;
+                this._quantity = value;
                 // Update this items total if more units added
                 this.CalculateTotal();
             }
