@@ -11,7 +11,7 @@ namespace Supermarket
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Offer()
         {
-            Products = new HashSet<Product>();
+            Products = new List<int>();
             Quantity = 0;
         }
 
@@ -44,8 +44,8 @@ namespace Supermarket
 
         public int? DiscountPercentage { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Products { get; set; }
+        [NotMapped]
+        public List<int> Products { get; set; }
 
         public override string ToString()
         {

@@ -25,34 +25,12 @@ namespace Supermarket
                 "The Quantity did not match");
             Assert.AreEqual(2, o1.TFTPOTGroup,
                 "The TFTPOTGroup did not match");
-            //Not sure how to test a list 
-            // I always get false on the comparison
-            ICollection<Product> l1 = new HashSet<Product>();
+            List<int> l1 = new List<int>();
             Product p1 = ProductTests.CreateProduct();
-            l1.Add(p1);
-            Assert.AreEqual(true, compare(
-                (HashSet<Product>)o1.Products, 
-                (HashSet<Product>)l1),
-                "The Products did not match: {0}, {1}", String.Join(",", l1),
+            l1.Add(p1.ProductID);
+            CollectionAssert.AreEqual(l1, o1.Products, "The Products did not match: {0}, {1}", String.Join(",", l1),
                 String.Join(",", o1.Products));
         }
-
-        // Needed a separte
-        private static Func<HashSet<Product>, HashSet<Product>, bool> compare = 
-            delegate(HashSet<Product> actual, HashSet<Product> expected)
-        {
-            foreach (Product product in actual)
-            {
-                if (expected.Contains(product))
-                    continue;
-                else
-                {
-                    Console.WriteLine(TypeDescriptor.GetProperties(product));
-                    return false;
-                }
-            }
-            return true;
-        };
 
         public static Offer CreateOffer()
         {
@@ -67,7 +45,8 @@ namespace Supermarket
                     o1.Quantity = 0;
                     o1.TFTPOTGroup = 2;
                     Product p1 = ProductTests.CreateProduct();
-                    o1.Products.Add(p1);
+                    int pID = p1.ProductID;
+                    o1.Products.Add(pID);
 
                 };
             }

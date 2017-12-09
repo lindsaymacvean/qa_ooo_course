@@ -34,15 +34,44 @@ namespace Supermarket
             // Set the UI with correct information
             productNameComboBox.DataSource = productNames;
             SetCurrentProduct((Product)productNameComboBox.SelectedItem);
-            basketDataGridView.DataSource = basket;
-            basketDataGridView.Columns["ProductID"].HeaderText = "Product ID";
-            basketDataGridView.Columns["ProductID"].DisplayIndex = 0;
-            basketDataGridView.Columns["UnitPrice"].HeaderText = "Unit Price";
+
+            // Set the basket datagridview
+            basketDataGridView.AutoGenerateColumns = false;
+            basketDataGridView.ColumnCount = 6;
+            basketDataGridView.Columns[0].HeaderText = "Product ID";
+            basketDataGridView.Columns[0].DataPropertyName = "ProductID";
+            basketDataGridView.Columns[1].HeaderText = "Name";
+            basketDataGridView.Columns[1].DataPropertyName = "Name";
+            basketDataGridView.Columns[2].HeaderText = "Unit Price";
+            basketDataGridView.Columns[2].DataPropertyName = "UnitPrice";
+            basketDataGridView.Columns[2].Name = "UnitPrice";
+            basketDataGridView.Columns[3].HeaderText = "Quantity";
+            basketDataGridView.Columns[3].DataPropertyName = "Quantity";
+            basketDataGridView.Columns[4].HeaderText = "Total Price";
+            basketDataGridView.Columns[4].DataPropertyName = "TotalPrice";
+            basketDataGridView.Columns[4].Name = "TotalPrice";
+            basketDataGridView.Columns[5].HeaderText = "Offer Shortcode";
+            basketDataGridView.Columns[5].DataPropertyName = "OfferShortDescription";
+            // The Offershortcode to be taken from the associated Offer in UpdateDataGridViews() 
             basketDataGridView.Columns["UnitPrice"].DefaultCellStyle.Format = "c2";
             basketDataGridView.Columns["UnitPrice"].DefaultCellStyle.FormatProvider = CultureInfo.GetCultureInfo("en-GB");
-            basketDataGridView.Columns["TotalPrice"].HeaderText = "Total Price";
             basketDataGridView.Columns["TotalPrice"].DefaultCellStyle.Format = "c2";
             basketDataGridView.Columns["TotalPrice"].DefaultCellStyle.FormatProvider = CultureInfo.GetCultureInfo("en-GB");
+
+            // Set explicit columns on Offers datagridview
+            offersAppliedDataGridView.AutoGenerateColumns = false;
+            offersAppliedDataGridView.ColumnCount = 4;
+            offersAppliedDataGridView.Columns[0].HeaderText = "Offer Description";
+            offersAppliedDataGridView.Columns[0].DataPropertyName = "OfferDescription";
+            offersAppliedDataGridView.Columns[1].HeaderText = "Quantity";
+            offersAppliedDataGridView.Columns[1].DataPropertyName = "Quantity";
+            offersAppliedDataGridView.Columns[2].HeaderText = "Discount Percentage";
+            offersAppliedDataGridView.Columns[2].DataPropertyName = "DiscountPercentage";
+            offersAppliedDataGridView.Columns[3].HeaderText = "Discount Amount";
+            offersAppliedDataGridView.Columns[3].DataPropertyName = "DiscountAmount";
+            offersAppliedDataGridView.Columns[3].Name = "DiscountAmount";
+            offersAppliedDataGridView.Columns["DiscountAmount"].DefaultCellStyle.Format = "c2";
+            offersAppliedDataGridView.Columns["DiscountAmount"].DefaultCellStyle.FormatProvider = CultureInfo.GetCultureInfo("en-GB");
         }
 
         private void SetCurrentProduct(Product currentSelection)
@@ -86,8 +115,10 @@ namespace Supermarket
             basketDataGridView.ClearSelection();
             // Update the offerDataGridView
             offersAppliedDataGridView.DataBindings.Clear();
-            offersAppliedDataGridView.DataSource = basket.OfferList.ToList();
+            offersAppliedDataGridView.DataSource = basket.OfferList.ToList(); 
+
             offersAppliedDataGridView.AutoResizeColumns();
+            offersAppliedDataGridView.ClearSelection();
             // Update the totals
             noItemsTextBox.Text = basket.NumberItems.ToString();
             totalTextBox.Text = "£"+basket.Total.ToString();
@@ -95,9 +126,9 @@ namespace Supermarket
 
         private void RemoveButton_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow item in basketDataGridView.SelectedRows)
+            foreach (DataGridViewRow row in basketDataGridView.SelectedRows)
             {
-                basket.Remove((BasketItem)item.DataBoundItem);
+                basket.Remove((BasketItem)row.DataBoundItem);
             }
             UpdateDataGridViews();
         }

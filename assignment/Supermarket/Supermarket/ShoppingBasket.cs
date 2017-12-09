@@ -17,18 +17,6 @@ namespace Supermarket
         }
         // 
         public OfferList OfferList { set; get; }
-        public OfferList OffersApplied
-        {
-            get
-            {
-                // Make a dictionary of currently available offers with the number of 
-                // basketitems associated with each
-                
-                // For each offer in the list calculate if the offer is applicable
-                this.TotalBeforeDiscount = 0;
-                return this.OfferList;
-            }
-        }
 
         public decimal NumberItems
         {
@@ -70,20 +58,24 @@ namespace Supermarket
             if (this.Contains(item.ProductID))
             {
                 this[item.ProductID].Quantity += item.Quantity;
+                OfferList.CalculateOffers(this);
             }
             else
             {
-                OfferList.Add(item.Offer);
                 base.InsertItem(index, item);
+                OfferList.Add(item);
+                OfferList.CalculateOffers(this);
             }
         }
 
         protected override void RemoveItem(int index)
         {
             BasketItem item = base.Items[index];
-            item.Offer.Quantity -= item.Quantity;
-            if (item.Offer.Quantity == 0)
-                OfferList.Remove(item.Offer.OfferID);
+            if (item.Offer != null)
+            {
+                item.Offer.Quantity -= item.Quantity;
+                OfferList.Remove(item);
+            }
             base.RemoveItem(index);
         }
     }
