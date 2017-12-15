@@ -56,9 +56,14 @@ namespace Supermarket
                         break;
                     //Three for the Price of Two (sandwiches)
                     case 2:
-                        break;
+                        // No Break statement so dropping through to handle both at the same time
                     //Three for the Price of Two (milk)
                     case 3:
+                        foreach (int productID in item.Offer.Products)
+                        {
+                            int freeItems = (basket[productID].Quantity - (basket[productID].Quantity % 3)) / 3;
+                            item.DiscountAmount = decimal.Multiply(freeItems, basket[productID].UnitPrice);
+                        }
                         break;
                     //10% off
                     case 4:

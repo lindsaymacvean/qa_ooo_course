@@ -49,7 +49,7 @@ namespace Supermarket
             basketDataGridView.Columns[3].HeaderText = "Quantity";
             basketDataGridView.Columns[3].DataPropertyName = "Quantity";
             basketDataGridView.Columns[4].HeaderText = "Total Price";
-            basketDataGridView.Columns[4].DataPropertyName = "TotalAmountBeforeDiscount";
+            basketDataGridView.Columns[4].DataPropertyName = "Total";
             basketDataGridView.Columns[4].Name = "TotalPrice";
             basketDataGridView.Columns[5].HeaderText = "Offer Shortcode";
             basketDataGridView.Columns[5].DataPropertyName = "OfferShortDescription";
@@ -64,7 +64,7 @@ namespace Supermarket
             offersAppliedDataGridView.ColumnCount = 4;
             offersAppliedDataGridView.Columns[0].HeaderText = "Offer Description";
             offersAppliedDataGridView.Columns[0].DataPropertyName = "OfferDescription";
-            offersAppliedDataGridView.Columns[1].HeaderText = "Quantity";
+            offersAppliedDataGridView.Columns[1].HeaderText = "Items with Offer";
             offersAppliedDataGridView.Columns[1].DataPropertyName = "OfferQuantity";
             offersAppliedDataGridView.Columns[2].HeaderText = "Discount Percentage";
             offersAppliedDataGridView.Columns[2].DataPropertyName = "DiscountPercentage";

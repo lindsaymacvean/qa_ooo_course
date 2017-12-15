@@ -31,16 +31,37 @@ namespace Supermarket
             }
         }
 
-        public decimal Total
+        public decimal TotalBeforeDiscount
         {
             get
             {
                 decimal total = 0;
                 foreach (BasketItem item in Items)
                 {
-                    total += item.TotalAmountAfterDiscount;
+                    total += item.Total;
                 }
                 return Math.Round(total, 2);
+            }
+        }
+
+        public decimal TotalDiscount
+        {
+            get
+            {
+                decimal total = 0;
+                foreach (BasketItem item in OfferList)
+                {
+                    total += item.Total;
+                }
+                return Math.Round(total, 2);
+            }
+        }
+
+        public decimal Total
+        {
+            get
+            {
+                return this.TotalBeforeDiscount - this.TotalDiscount;
             }
         }
 
