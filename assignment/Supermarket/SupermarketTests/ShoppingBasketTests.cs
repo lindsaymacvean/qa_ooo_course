@@ -8,7 +8,7 @@ namespace Supermarket
     public class ShoppingBasketTests
     {
         [TestMethod]
-        public void TestMethod1()
+        public void ShoppingBasketTest()
         {
             // Create a product item, offer, and add them to a basket item
 

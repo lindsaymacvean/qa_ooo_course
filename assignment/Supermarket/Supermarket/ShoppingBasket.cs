@@ -15,7 +15,7 @@ namespace Supermarket
         {
             this.OfferList = new OfferList();
         }
-        // 
+
         public OfferList OfferList { set; get; }
 
         public decimal NumberItems
@@ -25,7 +25,7 @@ namespace Supermarket
                 decimal i = 0;
                 foreach (BasketItem item in Items)
                 {
-                    i = i + item.Quantity;
+                    i += item.Quantity;
                 }
                 return i;
             }
@@ -58,6 +58,7 @@ namespace Supermarket
             if (this.Contains(item.ProductID))
             {
                 this[item.ProductID].Quantity += item.Quantity;
+                OfferList.Add(item);
                 OfferList.CalculateOffers(this);
             }
             else
@@ -76,6 +77,7 @@ namespace Supermarket
                 item.Offer.Quantity -= item.Quantity;
                 OfferList.Remove(item);
             }
+
             base.RemoveItem(index);
         }
     }

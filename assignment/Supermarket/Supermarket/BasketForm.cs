@@ -28,6 +28,7 @@ namespace Supermarket
         private void BasketForm_Load(object sender, EventArgs e)
         {
             // Get the collections of products
+
             var productNames = (from p in dBModel.Products
                                 select p).ToList();
 
@@ -64,12 +65,14 @@ namespace Supermarket
             offersAppliedDataGridView.Columns[0].HeaderText = "Offer Description";
             offersAppliedDataGridView.Columns[0].DataPropertyName = "OfferDescription";
             offersAppliedDataGridView.Columns[1].HeaderText = "Quantity";
-            offersAppliedDataGridView.Columns[1].DataPropertyName = "Quantity";
+            offersAppliedDataGridView.Columns[1].DataPropertyName = "OfferQuantity";
             offersAppliedDataGridView.Columns[2].HeaderText = "Discount Percentage";
             offersAppliedDataGridView.Columns[2].DataPropertyName = "DiscountPercentage";
+            offersAppliedDataGridView.Columns[2].Name = "DiscountPercentage";
             offersAppliedDataGridView.Columns[3].HeaderText = "Discount Amount";
             offersAppliedDataGridView.Columns[3].DataPropertyName = "DiscountAmount";
             offersAppliedDataGridView.Columns[3].Name = "DiscountAmount";
+            offersAppliedDataGridView.Columns["DiscountPercentage"].DefaultCellStyle.Format = "0\\%";
             offersAppliedDataGridView.Columns["DiscountAmount"].DefaultCellStyle.Format = "c2";
             offersAppliedDataGridView.Columns["DiscountAmount"].DefaultCellStyle.FormatProvider = CultureInfo.GetCultureInfo("en-GB");
         }

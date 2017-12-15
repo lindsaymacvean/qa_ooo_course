@@ -26,9 +26,25 @@ namespace Supermarket
         public decimal TotalPrice { get; private set; }
         public int ProductID { get; }
         public Offer Offer { get; }
+        public int DiscountPercentage { get; }
+
         public decimal DiscountAmount { get; set; }
         public string OfferDescription { get; }
         public string OfferShortDescription { get; }
+        public int? OfferQuantity
+        {
+            get
+            {
+                if (this.Offer != null)
+                    return this.Offer.Quantity;
+                return null;
+            }
+            set
+            {
+                if (this.Offer != null)
+                    this.OfferQuantity = value;
+            }
+        }
         public int OfferID { get; }
 
         public BasketItem(Product product, int quantity)
@@ -38,7 +54,7 @@ namespace Supermarket
             this.UnitPrice = Math.Round(product.UnitPrice,2);
             this.ProductID = product.ProductID;
             this.Quantity = quantity;
-            this.TotalPrice = product.UnitPrice * quantity;
+            // Total Price is set everytime Quantity is set
             this.DiscountAmount = 0.00M;
 
             this.Offer = product.Offer;
@@ -48,6 +64,10 @@ namespace Supermarket
                 this.Offer.Quantity += quantity;
                 // These are only needed because the datagrid needs to map from here
                 // I couldnt figure out how to map from the associated object
+                if (product.Offer.DiscountPercentage != null)
+                    this.DiscountPercentage = (int)product.Offer.DiscountPercentage;
+                else
+                    this.DiscountPercentage = 0;
                 this.OfferDescription = product.Offer.OfferDescription;
                 this.OfferShortDescription = product.Offer.ShortDescription;
             }

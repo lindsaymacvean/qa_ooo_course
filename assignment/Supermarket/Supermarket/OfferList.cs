@@ -15,14 +15,15 @@ namespace Supermarket
 
         protected override void InsertItem(int index, BasketItem item)
         {
+            // If the item does not have an Offer or
             // If the Keyed Collection already has the offer
-            // then just return
+            // then return
             if (item.Offer == null || this.Contains(item.OfferID))
                 return;
             else
             {
                 // Add the product to the Offers list of active products
-                item.Offer.Products.Add(item.ProductID);
+                //item.Offer.Products.Add(item.ProductID);
                 base.InsertItem(index, item);
             }
         }
