@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
@@ -18,8 +19,14 @@ namespace Supermarket
             // If the item does not have an Offer or
             // If the Keyed Collection already has the offer
             // then return
-            if (item.Offer == null || this.Contains(item.OfferID))
+            if (item.Offer == null)
                 return;
+            if (this.Contains(item.OfferID))
+            {
+                // Add the product to the Offers list of active products
+                item.Offer.Products.Add(item.ProductID);
+                return;
+            }
             else
             {
                 // Add the product to the Offers list of active products
@@ -48,30 +55,39 @@ namespace Supermarket
                 {
                     //Buy One Get One Free
                     case 1:
+                        decimal discountAmount = 0;
                         foreach (int productID in item.Offer.Products)
                         {
                             int freeItems = (basket[productID].Quantity - (basket[productID].Quantity % 2)) / 2;
-                            item.DiscountAmount = decimal.Multiply(freeItems, basket[productID].UnitPrice);
+                            discountAmount += decimal.Multiply(freeItems, basket[productID].UnitPrice);
                         }
+                        item.DiscountAmount = discountAmount;
                         break;
                     //Three for the Price of Two (sandwiches)
                     case 2:
                         // No Break statement so dropping through to handle both at the same time
                     //Three for the Price of Two (milk)
                     case 3:
-                        foreach (int productID in item.Offer.Products)
                         {
-                            int freeItems = (basket[productID].Quantity - (basket[productID].Quantity % 3)) / 3;
-                            item.DiscountAmount = decimal.Multiply(freeItems, basket[productID].UnitPrice);
+                            List<decimal> selectedItems = new List<decimal>();
+                            foreach (int productID in item.Offer.Products)
+                            {
+                                selectedItems.Add(basket[productID].UnitPrice);
+                            }
+                            decimal lowestPriceItem = selectedItems.Min();
+                            int freeItems = (this[item.OfferID].Offer.Quantity - (this[item.OfferID].Offer.Quantity % 3)) / 3;
+                            item.DiscountAmount = decimal.Multiply(freeItems, lowestPriceItem);
                         }
                         break;
                     //10% off
                     case 4:
+                        discountAmount = 0;
                         foreach (int productID in item.Offer.Products)
                         {
                             decimal totalProductValue = decimal.Multiply(basket[productID].Quantity, basket[productID].UnitPrice);
-                            item.DiscountAmount = (decimal)totalProductValue/(decimal)item.Offer.DiscountPercentage;
+                            discountAmount += (decimal)totalProductValue/(decimal)item.Offer.DiscountPercentage;
                         }
+                        item.DiscountAmount = discountAmount;
                         break;
                     default:
                         return;

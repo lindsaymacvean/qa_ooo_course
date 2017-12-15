@@ -51,7 +51,7 @@ namespace Supermarket
                 decimal total = 0;
                 foreach (BasketItem item in OfferList)
                 {
-                    total += item.Total;
+                    total += item.DiscountAmount;
                 }
                 return Math.Round(total, 2);
             }
@@ -93,11 +93,27 @@ namespace Supermarket
             BasketItem item = base.Items[index];
             if (item.Offer != null)
             {
+                item.Offer.Products.Remove(item.ProductID);
                 item.Offer.Quantity -= item.Quantity;
                 OfferList.Remove(item);
             }
 
             base.RemoveItem(index);
         }
+
+        protected override void ClearItems()
+        {
+            foreach (BasketItem item in base.Items)
+            {
+                if (item.Offer != null)
+                {
+                    item.Offer.Products.Remove(item.ProductID);
+                    item.Offer.Quantity -= item.Quantity;
+                    OfferList.Clear();
+                }
+            }
+            base.ClearItems();
+        }
+
     }
 }

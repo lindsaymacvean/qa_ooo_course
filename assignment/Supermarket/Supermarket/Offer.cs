@@ -5,13 +5,14 @@ namespace Supermarket
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Linq;
 
     public partial class Offer
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Offer()
         {
-            Products = new List<int>();
+            Products = new HashSet<int>();
             Quantity = 0;
         }
 
@@ -45,7 +46,7 @@ namespace Supermarket
         public int? DiscountPercentage { get; set; }
 
         [NotMapped]
-        public List<int> Products { get; set; }
+        public HashSet<int> Products { get; set; }
 
         public override string ToString()
         {

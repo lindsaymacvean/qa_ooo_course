@@ -138,7 +138,6 @@ namespace Supermarket
 
         private void RemoveAllButton_Click(object sender, EventArgs e)
         {
-            basket.OfferList.Clear();
             basket.Clear();
             UpdateDataGridViews();
         }
