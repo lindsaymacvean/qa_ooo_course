@@ -31,18 +31,16 @@ namespace Supermarket
             }
         }
 
-        // Question: should I have a private property to make this safer?
-        public decimal TotalBeforeDiscount { get; set; }
         public decimal Total
         {
             get
             {
-                decimal i = 0;
+                decimal total = 0;
                 foreach (BasketItem item in Items)
                 {
-                    i = i + item.TotalPrice;
+                    total += item.TotalAmountAfterDiscount;
                 }
-                return Math.Round(i, 2) - this.TotalBeforeDiscount;
+                return Math.Round(total, 2);
             }
         }
 

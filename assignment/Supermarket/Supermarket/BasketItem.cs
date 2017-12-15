@@ -23,7 +23,8 @@ namespace Supermarket
             }
         }
 
-        public decimal TotalPrice { get; private set; }
+        public decimal TotalAmountBeforeDiscount { get; private set; }
+        public decimal TotalAmountAfterDiscount { get; private set; }
         public int ProductID { get; }
         public Offer Offer { get; }
         public int DiscountPercentage { get; }
@@ -53,11 +54,10 @@ namespace Supermarket
             this.Name = product.ProductName;
             this.UnitPrice = Math.Round(product.UnitPrice,2);
             this.ProductID = product.ProductID;
-            this.Quantity = quantity;
             // Total Price is set everytime Quantity is set
             this.DiscountAmount = 0.00M;
-
             this.Offer = product.Offer;
+            this.Quantity = quantity;
             if (this.Offer != null)
             {
                 this.OfferID = product.Offer.OfferID;
@@ -71,11 +71,18 @@ namespace Supermarket
                 this.OfferDescription = product.Offer.OfferDescription;
                 this.OfferShortDescription = product.Offer.ShortDescription;
             }
+            CalculateTotal();
         }
 
         private void CalculateTotal()
         {
-            this.TotalPrice = this.Quantity * this.UnitPrice;
+            if (this.Offer != null)
+            {
+                this.TotalAmountBeforeDiscount = this.Offer.Quantity * this.UnitPrice;
+                this.TotalAmountAfterDiscount = TotalAmountBeforeDiscount - this.DiscountAmount;
+            } 
+            else 
+                this.TotalAmountAfterDiscount = this.Quantity * this.UnitPrice;
         }
     }
 }

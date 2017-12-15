@@ -23,7 +23,7 @@ namespace Supermarket
             else
             {
                 // Add the product to the Offers list of active products
-                //item.Offer.Products.Add(item.ProductID);
+                item.Offer.Products.Add(item.ProductID);
                 base.InsertItem(index, item);
             }
         }
@@ -48,6 +48,11 @@ namespace Supermarket
                 {
                     //Buy One Get One Free
                     case 1:
+                        foreach (int productID in item.Offer.Products)
+                        {
+                            int freeItems = (basket[productID].Quantity - (basket[productID].Quantity % 2)) / 2;
+                            item.DiscountAmount = decimal.Multiply(freeItems, basket[productID].UnitPrice);
+                        }
                         break;
                     //Three for the Price of Two (sandwiches)
                     case 2:

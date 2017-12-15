@@ -27,7 +27,7 @@ namespace SupermarketTests
                 "Product Id is not correct");
             Assert.AreEqual(1, b1.Quantity,
                 "Quantity is not correct");
-            Assert.AreEqual(10.00M, b1.TotalPrice);
+            Assert.AreEqual(10.00M, b1.TotalAmountBeforeDiscount);
             Assert.AreEqual(0.1, b1.DiscountAmount);
             //Assert.AreEqual(b1.Offer);
             Assert.AreEqual(1, b1.OfferID);
