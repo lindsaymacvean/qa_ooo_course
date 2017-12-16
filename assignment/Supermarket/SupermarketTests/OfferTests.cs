@@ -35,9 +35,9 @@ namespace Supermarket
                 UnitPrice = 10.00M,
                 Offer = null
             };
-            List<int> l1 = new List<int> { 1, 2 };
             o1.Products.Add(p1.ProductID);
-            CollectionAssert.AreEqual(l1, o1.Products, 
+            List<int> l1 = new List<int> { 1, 2 };
+            Assert.AreEqual(true, o1.Products.SetEquals(l1),
                 "Products did not match");
             Assert.AreEqual("Test description", o1.ToString());
         }

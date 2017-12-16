@@ -42,14 +42,14 @@ namespace Supermarket
             basketDataGridView.Columns[0].HeaderText = "Product ID";
             basketDataGridView.Columns[0].DataPropertyName = "ProductID";
             basketDataGridView.Columns[1].HeaderText = "Name";
-            basketDataGridView.Columns[1].DataPropertyName = "Name";
+            basketDataGridView.Columns[1].DataPropertyName = "ProductName";
             basketDataGridView.Columns[2].HeaderText = "Unit Price";
-            basketDataGridView.Columns[2].DataPropertyName = "UnitPrice";
+            basketDataGridView.Columns[2].DataPropertyName = "LatestPrice";
             basketDataGridView.Columns[2].Name = "UnitPrice";
             basketDataGridView.Columns[3].HeaderText = "Quantity";
             basketDataGridView.Columns[3].DataPropertyName = "Quantity";
             basketDataGridView.Columns[4].HeaderText = "Total Price";
-            basketDataGridView.Columns[4].DataPropertyName = "Total";
+            basketDataGridView.Columns[4].DataPropertyName = "TotalItemValue";
             basketDataGridView.Columns[4].Name = "TotalPrice";
             basketDataGridView.Columns[5].HeaderText = "Offer Shortcode";
             basketDataGridView.Columns[5].DataPropertyName = "OfferShortDescription";
@@ -123,8 +123,8 @@ namespace Supermarket
             offersAppliedDataGridView.AutoResizeColumns();
             offersAppliedDataGridView.ClearSelection();
             // Update the totals
-            noItemsTextBox.Text = basket.NumberItems.ToString();
-            totalTextBox.Text = "£"+basket.Total.ToString();
+            noItemsTextBox.Text = basket.NumberOfItems.ToString();
+            totalTextBox.Text = "£"+basket.BasketTotal.ToString();
         }
 
         private void RemoveButton_Click(object sender, EventArgs e)

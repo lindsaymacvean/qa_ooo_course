@@ -14,22 +14,23 @@ namespace SupermarketTests
         {
             Product p1 = ProductTests.CreateProduct();
             var expectedBasketItem = new BasketItem(p1, 1)
-            {
-
-            }.ToExpectedObject();
+                .ToExpectedObject();
 
             BasketItem b1 = CreateBasketItem();
-            Assert.AreEqual("test", b1.Name,
+            Assert.AreEqual("test", b1.ProductName,
                 "Basketitem Name is not correct");
-            Assert.AreEqual(10.00M, Math.Round(b1.UnitPrice, 2), 
+            Assert.AreEqual(10.00M, Math.Round(b1.LatestPrice, 2), 
                 "Unit Price is not the same");
             Assert.AreEqual(2, b1.ProductID,
                 "Product Id is not correct");
             Assert.AreEqual(1, b1.Quantity,
                 "Quantity is not correct");
-            Assert.AreEqual(10.00M, b1.TotalAmountBeforeDiscount);
-            Assert.AreEqual(0.1, b1.DiscountAmount);
-            //Assert.AreEqual(b1.Offer);
+            Assert.AreEqual(10.00M, b1.TotalItemValue);
+            // Because discounts are applied across multiple items
+            // It does not make sense to test this property here
+            // Instead it should be tested in an integration test
+            //Assert.AreEqual(0.1, b1.DiscountAmount);
+            expectedBasketItem.ShouldEqual(b1);
             Assert.AreEqual(1, b1.OfferID);
             Assert.AreEqual(1, b1.Offer.Quantity);
             Assert.AreEqual(10, b1.DiscountPercentage);

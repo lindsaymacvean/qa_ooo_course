@@ -8,8 +8,11 @@ namespace Supermarket
 {
     public class BasketItem
     {
-        public string Name { get; }
-        public decimal UnitPrice { get; }
+
+        // I did not have need of the AddItems method described in Spec
+        // Instead I handled this in the ShoppingBasket class.
+        public string ProductName { get; }
+        public decimal LatestPrice { get; }
         // To stop a stackoverflow we need a private property
         private int _quantity;
         public int Quantity
@@ -18,11 +21,11 @@ namespace Supermarket
             set { this._quantity = value; }
         }
 
-        public decimal Total
+        public decimal TotalItemValue
         {
             get
             {
-                return this.Quantity * this.UnitPrice;
+                return this.Quantity * this.LatestPrice;
             }
         }
         
@@ -52,8 +55,8 @@ namespace Supermarket
         public BasketItem(Product product, int quantity)
         {
             // Setting the public properties
-            this.Name = product.ProductName;
-            this.UnitPrice = Math.Round(product.UnitPrice,2);
+            this.ProductName = product.ProductName;
+            this.LatestPrice = Math.Round(product.UnitPrice,2);
             this.ProductID = product.ProductID;
             // Total Price is set everytime Quantity is set
             this.DiscountAmount = 0.00M;

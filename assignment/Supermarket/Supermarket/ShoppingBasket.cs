@@ -18,7 +18,7 @@ namespace Supermarket
 
         public OfferList OfferList { set; get; }
 
-        public decimal NumberItems
+        public decimal NumberOfItems
         {
             get
             {
@@ -38,7 +38,7 @@ namespace Supermarket
                 decimal total = 0;
                 foreach (BasketItem item in Items)
                 {
-                    total += item.Total;
+                    total += item.TotalItemValue;
                 }
                 return Math.Round(total, 2);
             }
@@ -57,7 +57,7 @@ namespace Supermarket
             }
         }
 
-        public decimal Total
+        public decimal BasketTotal
         {
             get
             {
@@ -70,6 +70,7 @@ namespace Supermarket
             return item.ProductID;
         }
 
+        // This is instead of the AddProduct method in the specification
         protected override void InsertItem(int index, BasketItem item)
         {
             // If the Keyed Collection already has the product
@@ -88,6 +89,7 @@ namespace Supermarket
             }
         }
 
+        // This is instead of the RemoveProduct method in the specification
         protected override void RemoveItem(int index)
         {
             BasketItem item = base.Items[index];
@@ -101,6 +103,7 @@ namespace Supermarket
             base.RemoveItem(index);
         }
 
+        // This is instead of the ClearBasket method in the specification
         protected override void ClearItems()
         {
             foreach (BasketItem item in base.Items)

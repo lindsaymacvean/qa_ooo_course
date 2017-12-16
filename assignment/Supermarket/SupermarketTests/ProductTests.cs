@@ -29,7 +29,7 @@ namespace Supermarket
                 ShortDescription = "test short description",
                 TFTPOTGroup = null,
                 DiscountPercentage = 10,
-                Products = new List<int> { 1, 2, 3 },
+                Products = new HashSet<int> { 1, 2, 3 },
             }.ToExpectedObject();
             expectedOffer.ShouldEqual(p1.Offer);
             Assert.AreEqual("test", p1.ToString());
@@ -53,7 +53,7 @@ namespace Supermarket
                     ShortDescription = "test short description",
                     TFTPOTGroup = null,
                     DiscountPercentage = 10,
-                    Products = new List<int> { 1, 2, 3 },
+                    Products = new HashSet<int> { 1, 2, 3 },
                 }
             };
             return p1;

@@ -59,7 +59,7 @@ namespace Supermarket
                         foreach (int productID in item.Offer.Products)
                         {
                             int freeItems = (basket[productID].Quantity - (basket[productID].Quantity % 2)) / 2;
-                            discountAmount += decimal.Multiply(freeItems, basket[productID].UnitPrice);
+                            discountAmount += decimal.Multiply(freeItems, basket[productID].LatestPrice);
                         }
                         item.DiscountAmount = discountAmount;
                         break;
@@ -72,7 +72,7 @@ namespace Supermarket
                             List<decimal> selectedItems = new List<decimal>();
                             foreach (int productID in item.Offer.Products)
                             {
-                                selectedItems.Add(basket[productID].UnitPrice);
+                                selectedItems.Add(basket[productID].LatestPrice);
                             }
                             decimal lowestPriceItem = selectedItems.Min();
                             int freeItems = (this[item.OfferID].Offer.Quantity - (this[item.OfferID].Offer.Quantity % 3)) / 3;
@@ -84,7 +84,7 @@ namespace Supermarket
                         discountAmount = 0;
                         foreach (int productID in item.Offer.Products)
                         {
-                            decimal totalProductValue = decimal.Multiply(basket[productID].Quantity, basket[productID].UnitPrice);
+                            decimal totalProductValue = decimal.Multiply(basket[productID].Quantity, basket[productID].LatestPrice);
                             discountAmount += (decimal)totalProductValue/(decimal)item.Offer.DiscountPercentage;
                         }
                         item.DiscountAmount = discountAmount;

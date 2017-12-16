@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
+using ExpectedObjects;
 
 namespace Supermarket
 {
@@ -15,38 +16,39 @@ namespace Supermarket
             // Add first product
             Product p1 = ProductTests.CreateProduct();
 
-            // Create a corresponding offer for the product
-            Offer o1 = new Offer
-            {
-                OfferID = 321,
-                OfferDescription = "Test description",
-                ShortDescription = "Discount",
-                DiscountPercentage = 10
-            };
-
-            List<Offer> ol = new List<Offer>
-            {
-                o1
-            };
-
-            // Add the offer to the product
-            p1.Offer = o1;
-
             // Create a basket item 
             BasketItem item1 = new BasketItem(p1, 2);
 
-
             // Create the actual basket and add the item to it
-            ShoppingBasket basket = new ShoppingBasket
-            {
-                item1
-            };
+            //ShoppingBasket basket = new ShoppingBasket();
+            //basket.Add(item1);
 
-            Decimal total = basket.Total;
-            // https://msdn.microsoft.com/en-us/library/ms243456.aspx
-            //Assert.AreEqual(expected, total, 0.001, "Failure message");
+            ////basket check
+            //var expectedBasket = new ShoppingBasket()
+            //{
+
+            //}.ToExpectedObject();
+            //expectedBasket.ShouldEqual(basket);
+
+            ////OfferList
+            //var expectedOfferList = new OfferList()
+            //{
+
+            //}.ToExpectedObject();
+            //expectedOfferList.ShouldEqual(basket.OfferList);
+
+            ////NumberOfItems
 
 
+            ////TotalBeforeDiscount
+
+            ////TotalDiscount
+
+            ////BasketTotal
+
+            ////Remove()
+
+            ////Clear
 
 
             /* Adding one item for each type of offer
